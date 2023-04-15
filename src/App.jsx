@@ -1,8 +1,7 @@
 import testData from "./assents/data.json";
-import Card from "./components/Card/Card"; // Card.jsx
+import Card from "./components/Card/Card";
 import Promo from "./components/Promo/Promo";
-import Header from "./components/General"; // Header/index.jsx
-import { Footer } from "./components/General";
+import {Header, Footer} from "./components/General"; // index.jsx
 
 const promoData = ["=)", "^_^", "O_o", "x_x", "=(", ";(", "0l0"];
 
