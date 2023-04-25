@@ -16,7 +16,7 @@ const App = () => {
     return (
         <>
             {/* upd - передали функцию setUser внутрь компонента Header, чтобы внутри использовать ее как слово upd() */}
-            <Header user={user} upd={setUser}/>
+            <Header user={user} upd={setUser} searchArr={testData}/>
             <div>
                 <h1>First Page</h1>
                 <div className="container">
