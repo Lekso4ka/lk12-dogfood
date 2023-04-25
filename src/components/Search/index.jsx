@@ -1,6 +1,7 @@
 import {useState, useEffect} from "react";
+import "./style.css";
 
-const Search = ({data}) => {
+const Search = ({data, setGoods, setSearchResult}) => {
 	// let text = "ololo"
 	const [text, setText] = useState("");
 	const [num, setNum] = useState(0);
@@ -25,18 +26,27 @@ const Search = ({data}) => {
 	}
 	console.log(text);
 	useEffect(() => {
-		console.log("ololo");
-	}, [num]);
+		let str = '';
+		if (num && text) {
+			str = `По запросу ${text} найдено ${num} товаров`;
+		} else if (text) {
+			str = `По запросу ${text} не найдено ни одного товара`;
+		} else {
+			str = '';
+		}
+		setSearchResult(str);
+	}, [num, text]);
 	useEffect(() => {
 		// console.log("ololo");
 		let result = data.filter(el => el.name.toLowerCase().includes(text));
+		setGoods(result);
 		setNum(result.length);
 		console.log(result);
 	}, [text]);
 	return <>
-		<input type="search" value={text} onChange={changeValue}/>
+		<input className="search" type="search" value={text} onChange={changeValue}/>
 		{/*<button onClick={changeText}>Тык {num} раз</button>*/}
-		{text && <p>По запросу {text} найдено {num} товаров</p>}
+		{/*{text && <p>По запросу {text} найдено {num} товаров</p>}*/}
 	</>
 }
 

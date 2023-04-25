@@ -14,7 +14,13 @@ import Search from "../Search";
 // const Header = ({user}) => {
 //     console.log(user)
 // }
-const Header = ({user, upd, searchArr}) => {
+const Header = ({
+        user, 
+        upd, 
+        searchArr,
+        setGoods, 
+        setSearchResult
+    }) => {
     const login = () => {
         localStorage.setItem("user12", "Vasya");
         upd("Vasya");
@@ -26,7 +32,11 @@ const Header = ({user, upd, searchArr}) => {
     return <header>
         <Logo/>
         <div className="search-block">
-            <Search data={searchArr}/>
+            <Search 
+                data={searchArr} 
+                setGoods={setGoods} 
+                setSearchResult={setSearchResult}
+            />
         </div>
         <nav className="header__menu">
             {user && <>
