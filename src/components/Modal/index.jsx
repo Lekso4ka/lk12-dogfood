@@ -35,6 +35,14 @@ const Modal = ({
 			body.group = "group-12"
 		}
 		console.log(body);
+
+		// `https://api.react-learning.ru/signup`
+		// {
+		// 	group: "group-12",
+		// 	password: "---",
+		// 	email: "ваша почта"
+		// }
+
 		const path = `https://api.react-learning.ru/${isReg ? "signup" : "signin"}`;
 		const res = await fetch(path, {
 			method: "POST",
