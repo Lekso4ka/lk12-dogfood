@@ -19,11 +19,13 @@ const Header = ({
         upd, 
         searchArr,
         setGoods, 
-        setSearchResult
+        setSearchResult,
+        setModalOpen
     }) => {
     const login = () => {
-        localStorage.setItem("user12", "Vasya");
-        upd("Vasya");
+        setModalOpen(true)
+        // localStorage.setItem("user12", "Vasya");
+        // upd("Vasya");
     }
     const logout = () => {
         localStorage.removeItem("user12");
