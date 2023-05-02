@@ -40,6 +40,21 @@ p {
   }
 }
 
+.info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.info-link {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  text-shadow: 0 0 1px yellow;
+  user-select: none;
+}
+.info-link:hover {
+  text-shadow: 0 0 7px yellow;
+}
 
 
 
