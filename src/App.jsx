@@ -1,17 +1,19 @@
 import {useState, useEffect} from "react";
+import {Routes, Route} from "react-router-dom";
+/* SPA - Single Page Application - Приложение с одной страницей */
 
 import testData from "./assents/data.json";
-import Card from "./components/Card/Card";
-import Promo from "./components/Promo/Promo";
+
+// Подключаем компоненты
 import Modal from "./components/Modal";
 import {Header, Footer} from "./components/General"; // index.jsx
 
-const promoData = ["=)", "^_^", "O_o", "x_x", "=(", ";(", "0l0"];
-
-console.log(testData);
+// Подключаем странички
+import Home from "./pages/Home"
+import Catalog from "./pages/Catalog"
+import OldPage from "./pages/Old"
 
 const App = () => {
-    // const user = localStorage.getItem("user12");
     const [user, setUser] = useState(localStorage.getItem("user12"));
     const [userId, setUserId] = useState(localStorage.getItem("user12-id"));
     const [token, setToken] = useState(localStorage.getItem("token12"));
@@ -36,7 +38,6 @@ const App = () => {
     }, [token])
     return (
         <>
-            {/* upd - передали функцию setUser внутрь компонента Header, чтобы внутри использовать ее как слово upd() */}
             <Header 
                 user={user} 
                 upd={setUser} 
@@ -45,13 +46,16 @@ const App = () => {
                 setSearchResult={setSearchResult}
                 setModalOpen={setModalOpen}
             />
-            <div className="container">
-                {searchResult && <p className="search-result">{searchResult}</p>}
-                {goods.map((pro, i) => (
-                    <Card key={i} img={pro.pictures} name={pro.name} price={pro.price} />
-                ))}
-                {/*{promoData.map(el => <Promo key={el} text={el}/>)}*/}
-            </div>
+            <Routes>
+                <Route path="/" element={<Home/>}/>
+                <Route path="/catalog" element={<Catalog/>}/>
+                <Route path="/old" element={
+                    <OldPage 
+                        searchText={searchResult}
+                        goods={goods}
+                    />
+                }/>
+            </Routes>
             <Footer/>
             <Modal 
                 isActive={modalOpen} 
