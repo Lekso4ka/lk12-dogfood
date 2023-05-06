@@ -76,7 +76,13 @@ const App = () => {
             <main>
                 <Routes>
                     <Route path="/" element={<Home user={user} setActive={setModalOpen}/>}/>
-                    <Route path="/catalog" element={<Catalog goods={goods}/>}/>
+                    <Route path="/catalog" element={
+                        <Catalog 
+                            goods={goods}
+                            setBaseData={setBaseData}
+                            userId={userId}
+                        />
+                    }/>
                     <Route path="/old" element={
                         <OldPage 
                             searchText={searchResult}
@@ -101,7 +107,7 @@ const App = () => {
                         /product/year/2022
                         /product/year/2019
                     */}
-                    <Route path="/product/:id" element={<Product/>}/>
+                    <Route path="/product/:id" element={<Product />}/>
                 </Routes>
             </main>
             <Footer/>
