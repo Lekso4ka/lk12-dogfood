@@ -1,5 +1,6 @@
 import {useState, useEffect} from "react";
 import {Routes, Route} from "react-router-dom";
+
 /* SPA - Single Page Application - Приложение с одной страницей */
 
 // import testData from "./assents/data.json";
