@@ -1,10 +1,10 @@
-import {useState, useEffect} from "react";
+import {useState, useEffect, createContext} from "react";
 import {Routes, Route} from "react-router-dom";
 
 /* SPA - Single Page Application - Приложение с одной страницей */
 
 // import testData from "./assents/data.json";
-
+import Ctx from "./ctx"
 // Подключаем компоненты
 import Modal from "./components/Modal";
 import {Header, Footer} from "./components/General"; // index.jsx
@@ -65,14 +65,29 @@ const App = () => {
     useEffect(() => {
         setGoods(baseData)
     }, [baseData])
+
+    // const Ctx = createContext({});
+    // import {Ctx} from "./App"
+
     return (
-        <>
+        // объявляем контекст в приложении
+        /*
+        * age = 2
+        * value = {
+        *   name: "User",
+        *   setName: function(){}
+        *   age => age: age
+        * }
+        * */
+        <Ctx.Provider value={{
+            searchResult,
+            setSearchResult
+        }}>
             <Header 
                 user={user} 
                 upd={setUser} 
                 searchArr={baseData}
-                setGoods={setGoods} 
-                setSearchResult={setSearchResult}
+                setGoods={setGoods}
                 setModalOpen={setModalOpen}
             />
             <main>
@@ -86,8 +101,7 @@ const App = () => {
                         />
                     }/>
                     <Route path="/old" element={
-                        <OldPage 
-                            searchText={searchResult}
+                        <OldPage
                             goods={goods}
                         />
                     }/>
@@ -119,7 +133,7 @@ const App = () => {
                 setIsActive={setModalOpen}
                 setUser={setUser}
             />
-        </>
+        </Ctx.Provider>
     )
 }
 
