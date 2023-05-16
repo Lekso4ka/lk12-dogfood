@@ -82,7 +82,8 @@ const App = () => {
         <Ctx.Provider value={{
             searchResult,
             setSearchResult,
-            setBaseData
+            setBaseData,
+            baseData
         }}>
             {/*<Ctx2.Provider>*/}
             {/*Так можно использовать еще один контекст для ограниченного количества компнентов*/}
