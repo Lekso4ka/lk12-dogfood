@@ -81,22 +81,25 @@ const App = () => {
         * */
         <Ctx.Provider value={{
             searchResult,
-            setSearchResult
+            setSearchResult,
+            setBaseData
         }}>
-            <Header 
-                user={user} 
-                upd={setUser} 
-                searchArr={baseData}
-                setGoods={setGoods}
-                setModalOpen={setModalOpen}
-            />
+            {/*<Ctx2.Provider>*/}
+            {/*Так можно использовать еще один контекст для ограниченного количества компнентов*/}
+                <Header
+                    user={user}
+                    upd={setUser}
+                    searchArr={baseData}
+                    setGoods={setGoods}
+                    setModalOpen={setModalOpen}
+                />
+            {/*</Ctx2.Provider>*/}
             <main>
                 <Routes>
                     <Route path="/" element={<Home user={user} setActive={setModalOpen}/>}/>
                     <Route path="/catalog" element={
                         <Catalog 
                             goods={goods}
-                            setBaseData={setBaseData}
                             userId={userId}
                         />
                     }/>
