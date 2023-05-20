@@ -16,6 +16,7 @@ import OldPage from "./pages/Old";
 import Profile from "./pages/Profile";
 import Product from "./pages/Product";
 import AddProduct from "./pages/AddProduct";
+import Favorites from "./pages/Favorites";
 
 const App = () => {
     const [user, setUser] = useState(localStorage.getItem("user12"));
@@ -63,7 +64,9 @@ const App = () => {
     }, [token])
 
     useEffect(() => {
-        setGoods(baseData)
+        // console.log("000")
+        // console.log(baseData.filter(el => el._id === "622c77cc77d63f6e70967d1e")[0].likes);
+        // setGoods(baseData)
     }, [baseData])
 
     // const Ctx = createContext({});
@@ -83,7 +86,11 @@ const App = () => {
             searchResult,
             setSearchResult,
             setBaseData,
-            baseData
+            baseData,
+            goods,
+            setGoods,
+            userId,
+            token
         }}>
             {/*<Ctx2.Provider>*/}
             {/*Так можно использовать еще один контекст для ограниченного количества компнентов*/}
@@ -111,6 +118,9 @@ const App = () => {
                     }/>
                     <Route path="/profile" element={
                         <Profile user={user} setUser={setUser}/>}
+                    />
+                    <Route path="/favorites" element={
+                        <Favorites />}
                     />
                     {/*
                         :id - параметризованный запрос, где то, что идет после : является различными данными, которые можно вызвать при помощи свойства id

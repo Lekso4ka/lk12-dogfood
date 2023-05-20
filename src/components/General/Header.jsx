@@ -4,8 +4,7 @@ import {
     BalloonHeart, 
     Cart4, 
     PersonCircle, 
-    BuildingUp, 
-    // BuildingDown
+    BuildingUp
 } from "react-bootstrap-icons";
 
 import Search from "../Search";
@@ -28,10 +27,10 @@ const Header = ({
         </div>
         <nav className="header__menu">
             {user && <>
-                <Link to="/">
+                <Link to="/favorites">
                     <BalloonHeart title="Избранное"/>
                 </Link>
-                <Link to="/">
+                <Link to="/cart">
                     <Cart4  title="Корзина"/>
                 </Link>
                 <Link to="/profile">
@@ -40,7 +39,6 @@ const Header = ({
             </>}
             <span>
                 {!user && <BuildingUp  title="Войти" onClick={login}/>}
-                {/*{user && <BuildingDown title="Выйти" onClick={logout}/>}*/}
             </span>
         </nav>
     </header>
