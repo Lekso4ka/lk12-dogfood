@@ -5,6 +5,7 @@ import {Routes, Route} from "react-router-dom";
 
 // import testData from "./assents/data.json";
 import Ctx from "./ctx"
+import Api from "./Api"
 // Подключаем компоненты
 import Modal from "./components/Modal";
 import {Header, Footer} from "./components/General"; // index.jsx
@@ -22,6 +23,7 @@ const App = () => {
     const [user, setUser] = useState(localStorage.getItem("user12"));
     const [userId, setUserId] = useState(localStorage.getItem("user12-id"));
     const [token, setToken] = useState(localStorage.getItem("token12"));
+    const [api, setApi] = useState(new Api(token));
     /*
         Есть массив с товарами (основной) [a,b,c] => [b,c] => [a]???
         | |
@@ -48,20 +50,43 @@ const App = () => {
     }, [user])
 
     useEffect(() => {
+        setApi(new Api(token));
         console.log("token", token);
+        // if (token) {
+        //     fetch("https://api.react-learning.ru/products", {
+        //         headers: {
+        //             "Authorization": `Bearer ${token}`
+        //         }
+        //     })
+        //         .then(res => res.json())
+        //         .then(data => {
+        //             console.log(data);
+        //             setBaseData(data.products);
+        //         })
+        // }
+    }, [token])
+
+    useEffect(() => {
         if (token) {
-            fetch("https://api.react-learning.ru/products", {
-                headers: {
-                    "Authorization": `Bearer ${token}`
-                }
-            })
-                .then(res => res.json())
+            api.getProducts()
                 .then(data => {
                     console.log(data);
                     setBaseData(data.products);
                 })
+        } else {
+            setBaseData([]);
         }
-    }, [token])
+    }, [api])
+    /*
+    useEffect(cb) - срабатывает при любом изменении внутри компонента
+    useEffect(cb, []) - срабатывает один раз при создании компонента
+    useEffect(cb, [props]) - срабатывает каждый раз, когда изменяется props
+    useEffect(cb, [props1, props2, props3]) - срабатывает каждый раз, когда изменяется props1 или props2 или props3
+    */
+
+    /*
+    * componentDidUpdate
+    * */
 
     useEffect(() => {
         // console.log("000")
@@ -90,7 +115,8 @@ const App = () => {
             goods,
             setGoods,
             userId,
-            token
+            token,
+            api
         }}>
             {/*<Ctx2.Provider>*/}
             {/*Так можно использовать еще один контекст для ограниченного количества компнентов*/}
