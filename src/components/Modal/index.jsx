@@ -1,12 +1,14 @@
-import {useState} from "react";
+import {useState, useContext} from "react";
 import {XOctagon} from "react-bootstrap-icons";
+import Ctx from "../../ctx";
 import "./style.css"
 
 const Modal = ({
 	isActive, 
-	setIsActive, 
+	setIsActive,
 	setUser
 }) => {
+	const {api} = useContext(Ctx);
 	const [isReg, setIsReg] = useState(false);
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
@@ -43,15 +45,16 @@ const Modal = ({
 		// 	email: "ваша почта"
 		// }
 
-		const path = `https://api.react-learning.ru/${isReg ? "signup" : "signin"}`;
-		const res = await fetch(path, {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json"
-			},
-			body: JSON.stringify(body)
-		})
-		const data = await res.json();
+		// const path = `https://api.react-learning.ru/${isReg ? "signup" : "signin"}`;
+		// const res = await fetch(path, {
+		// 	method: "POST",
+		// 	headers: {
+		// 		"Content-Type": "application/json"
+		// 	},
+		// 	body: JSON.stringify(body)
+		// })
+		// const data = await res.json();
+		const data = await (isReg ? api.register(body) : api.auth(body))
 		console.log(data);
 		if (isReg) {
 			if (data?._id) {

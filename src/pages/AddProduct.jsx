@@ -13,11 +13,14 @@
     }
 */
 
-import {useState} from "react";
+import {useState, useContext, useEffect} from "react";
 import {Container, Row, Col, Form, Button} from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import Ctx from "../ctx";
+
 const AddProduct = () => {
     const navigate = useNavigate();
+    const {api, setBaseData} = useContext(Ctx);
     const [name, setName] = useState("");
     const [link, setLink] = useState("https://beolin.club/uploads/posts/2022-07/1657851760_12-beolin-club-p-risunok-kostochki-karandashom-krasivo-19.png"); // pictures
     const [price, setPrice] = useState(999);
@@ -71,24 +74,25 @@ const AddProduct = () => {
             tags: tagWord && !tags.includes(tagWord) ? [...tags, tagWord] : tags
         };
         console.log(body);
-        fetch("https://api.react-learning.ru/products", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${localStorage.getItem("token12")}`
-            },
-            body: JSON.stringify(body)
-        })
-            .then(res => res.json())
+        api.addProduct(body)
             .then(data => {
                 console.log(data);
                 if (!data.err && !data.error) {
                     clearForm();
                     // перенаправление на страницу с новым товар
                     navigate(`/product/${data._id}`)
+                    // v1 - добавить товар на стороне клиента
+                    setBaseData(prev => [...prev, data]);
+                    // v2 - снова стянуть данные с сервера
+                    // api.getProducts()
+                    //     .then(data => setBaseData(data.products))
                 }
             })
     }
+
+    // useEffect(() => {
+    //     console.log("форма обновилась")
+    // }, [name])
     return <Container style={{gridTemplateColumns: "auto"}}>
         <Row>
             <Col xs={12}><h1>Добавить новый товар</h1></Col>

@@ -178,3 +178,47 @@ const App = () => {
 }
 
 export default App;
+
+/*
+* props <Component color="red"> - статичное свойство, которое не изменяется внутри этого компонента
+*
+* state - динамически изменяемое свойство
+* const [color, setColor] = useState("red")
+* setColor("blue")
+* <Component color={color}>
+*
+* Меняется в зависимости от свойства color
+* useEffect(() => {
+*   // do something
+* }, [color])
+*
+* obj = {
+*   color: color
+* }
+* <Component color={color}>
+    <Text color={color}>
+        <Char color={color}/>
+    </Text>
+* </Component>
+*
+*
+* <Component>
+    <Text>
+        <Char color={obj.color}/>
+    </Text>
+* </Component>
+*
+* obj - это глобальное хранилище данных (статичных или динамичных для компонентов, которые находятся в зоне видимости этого объекта)
+*
+* 1) React.Context - часть библиотеки React
+* 2) Redux - внешняя библиотека, устанавливается как и React.Router дополнительно
+* <Obj.Provider>
+    <Component>
+        <Text>
+            <Char color={obj.color}/>
+        </Text>
+    </Component>
+* </Obj.Provider>
+*
+* localStorage - сохранить данные внутри браузера, чтобы в дальнейшем к ним вернуться - чтобы не авторизовываться каждый раз, когда мы делаем изменение в React
+* */
